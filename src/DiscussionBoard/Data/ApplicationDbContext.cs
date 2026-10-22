@@ -10,6 +10,13 @@ namespace DiscussionBoard.Data
         {
             base.OnModelCreating(builder);
 
+            ModelBuilder.Entity<Forum>()
+                .HasMany(f => f.Threads);
+
         }
+
+        public DbSet<DiscussionThread> DiscussionThread { get; set; }
+        public DbSet<Forum> Forums { get; set; }
+        public DbSet<Post> Posts { get; set; }
     }
 }
