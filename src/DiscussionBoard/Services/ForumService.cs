@@ -1,5 +1,6 @@
 ﻿using DiscussionBoard.Data;
 using DiscussionBoard.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscussionBoard.Services
 {
@@ -11,7 +12,7 @@ namespace DiscussionBoard.Services
         public async Task<List<Forum>> GetAllAsync()
         {
             var forums = _context.Forums
-                .Where(f => isDeleted == false);
+                .Where(f => f.isDeleted == false);
             return await forums.ToListAsync();
         }
     }
