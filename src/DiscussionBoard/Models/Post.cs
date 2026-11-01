@@ -2,6 +2,12 @@
 {
     public class Post : DiscussionBase
     {
+        public int DiscussionThreadId { get; set; }
+        public DiscussionThread DiscussionThread { get; set; }
 
+        public int? ParentPostId { get; set; }
+        public Post? ParentPost { get; set; }
+
+        public List<Post> Replies { get; set; } = new List<Post>();
     }
 }
