@@ -25,15 +25,9 @@ namespace DiscussionBoard.Pages.Forums
         public void OnGet()
         {
             forum = _forums.GetAsync(forumid).GetAwaiter().GetResult();
-            DiscussionThread lastThread = new DiscussionThread() {Id = -13112, Title = "blank", Content = "blank"};
 
             foreach (DiscussionThread thread in _threads.GetForForumAsync(forumid).GetAwaiter().GetResult())
             {
-                if (thread.Id == lastThread.Id)
-                {
-                    continue;
-                }
-                lastThread = thread;
                 forum.DiscussionThreads.Add(thread);
             }
         }
