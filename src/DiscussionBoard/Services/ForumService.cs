@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiscussionBoard.Services
 {
-    public class ForumService
+    public class ForumService : IForumService
     {
         private readonly ApplicationDbContext _context;
 
@@ -12,8 +12,14 @@ namespace DiscussionBoard.Services
         public async Task<List<Forum>> GetAllAsync()
         {
             var forums = _context.Forums
-                .Where(f => f.isDeleted == false);
+                .Where(f => f.IsDeleted == false);
             return await forums.ToListAsync();
+        }
+
+        public async Task<Forum> GetAsync(int id)
+        {
+            return await _context.Forums
+                .SingleOrDefaultAsync(t => t.Id == id);
         }
     }
 }

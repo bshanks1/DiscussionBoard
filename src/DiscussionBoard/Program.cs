@@ -5,6 +5,7 @@ using DiscussionBoard.Models;
 using DiscussionBoard.Services;
 using Serilog;
 using Serilog.Formatting.Compact;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace DiscussionBoard
 {
@@ -41,6 +42,10 @@ namespace DiscussionBoard
             builder.Services.AddRazorPages();
 
             builder.Services.AddSingleton<ILogReader, JsonLogReader>();
+            builder.Services.AddScoped<IDiscussionThreadService, DiscussionThreadService>();
+            builder.Services.AddScoped<IForumService, ForumService>();
+            builder.Services.AddScoped<IPostService, PostService>();
+
 
             var app = builder.Build();
 

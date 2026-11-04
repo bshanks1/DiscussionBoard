@@ -1,0 +1,9 @@
+﻿@page "/Discussions/{threadId}"
+@model DiscussionBoard.Pages.Discussions.Details
+
+@{ ViewData["Title"] = "Details"; }
+<h1>Details</h1>
+@foreach (var post in Model.nodes)
+{
+    <partial name="/Pages/Discussions/_PostTree.cshtml" model="post" />
+}

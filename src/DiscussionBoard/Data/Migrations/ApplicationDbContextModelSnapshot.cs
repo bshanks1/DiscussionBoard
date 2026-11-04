@@ -93,6 +93,7 @@ namespace DiscussionBoard.Data.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
+                        .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -101,12 +102,13 @@ namespace DiscussionBoard.Data.Migrations
                     b.Property<int>("ForumId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -124,15 +126,14 @@ namespace DiscussionBoard.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -151,6 +152,7 @@ namespace DiscussionBoard.Data.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
+                        .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -159,15 +161,16 @@ namespace DiscussionBoard.Data.Migrations
                     b.Property<int>("DiscussionThreadId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("ParentPostId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

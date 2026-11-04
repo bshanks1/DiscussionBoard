@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace DiscussionBoard.Pages;
 public class ForumsModel : PageModel
 {
-    private readonly ForumService _forums;
+    private readonly IForumService _forums;
     private readonly ILogger<ForumsModel> _logger;
 
     public List<Forum> Items { get; private set; } = [];
@@ -14,7 +14,7 @@ public class ForumsModel : PageModel
     /// </summary>
     /// <param name="forums">Service to manage forums</param>
     /// <param name="logger">Logging provider</param>
-    public ForumsModel(ForumService forums, ILogger<ForumsModel> logger)
+    public ForumsModel(IForumService forums, ILogger<ForumsModel> logger)
     {
         _forums = forums;
         _logger = logger;

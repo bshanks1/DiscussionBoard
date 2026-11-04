@@ -1,0 +1,24 @@
+﻿@page "/Discussions/Edit/{threadid}"
+@model DiscussionBoard.Pages.Discussions.Edit
+
+<html>
+<head>
+    <title>@{ ViewData["Title"] = "Create"; }</title>
+</head>
+<body>
+<div id="form">
+    <form method="post">
+        <div class="mb-3">
+            <label>Edit Thread Title</label>
+            <input type="text" id="Title" name="Title" value="@Model.Thread.Title">
+        </div>
+        <div class="mb-3">
+            <label>Edit Thread Title</label>
+            <textarea type="text" id="Content" name="Content" rows="5" cols="33">@Model.Thread.Content</textarea>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
+
