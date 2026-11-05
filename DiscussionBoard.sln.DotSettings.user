@@ -7,5 +7,8 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003APageModel_002Ecs_002Fl_003A_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2026_002E2_003Fresharper_002Dhost_003FSourcesCache_003Fe4eba1a5d3fbc084947fb1e8de2a3870d699a158372736d71ecdb28fbf581a_003FPageModel_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AResourceInvoker_002Ecs_002Fl_003A_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2026_002E2_003Fresharper_002Dhost_003FSourcesCache_003F8d9085adb4ff9548682c7bd179fa5fb12442b9b9a89a1953d31d8fd07f094_003FResourceInvoker_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8e19cd0c_002D1095_002D4037_002Dbb2a_002D18a22eb57f54/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;tests&amp;gt;\&amp;lt;DiscussionBoard.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="C:\Users\besha\DiscussionBoard\tests\DiscussionBoard.Tests" Presentation="&amp;lt;tests&amp;gt;\&amp;lt;DiscussionBoard.Tests&amp;gt;" /&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::04A5D88D-1E21-4EE1-2E08-3F734E480737::net10.0::DiscussionBoard.Tests.Authentication.ProfileContractTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::04A5D88D-1E21-4EE1-2E08-3F734E480737::net10.0::DiscussionBoard.Tests.Authentication.ProfileServiceBehaviorTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
