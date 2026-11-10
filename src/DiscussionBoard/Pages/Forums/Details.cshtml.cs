@@ -1,5 +1,6 @@
 ﻿using DiscussionBoard.Models;
 using DiscussionBoard.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -14,22 +15,33 @@ namespace DiscussionBoard.Pages.Forums
         private readonly IForumService _forums;
         private readonly IDiscussionThreadService _threads;
         private readonly ILogger<Details> _logger;
+        public UserManager<ApplicationUser> userManager;
 
-        public Details(IForumService forums, IDiscussionThreadService threads, ILogger<Details> logger)
+        public Details(IForumService forums, IDiscussionThreadService threads, ILogger<Details> logger, UserManager<ApplicationUser> userManager)
         {
             _forums = forums;
             _threads = threads;
             _logger = logger;
+            this.userManager = userManager;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
-            forum = _forums.GetAsync(forumid).GetAwaiter().GetResult();
-
-            foreach (DiscussionThread thread in _threads.GetForForumAsync(forumid).GetAwaiter().GetResult())
+            if (!User.Identity.IsAuthenticated)
             {
-                forum.DiscussionThreads.Add(thread);
+                return Challenge();
             }
+            else
+            {
+                forum = _forums.GetAsync(forumid).GetAwaiter().GetResult();
+
+                foreach (DiscussionThread thread in _threads.GetForForumAsync(forumid).GetAwaiter().GetResult())
+                {
+                    forum.DiscussionThreads.Add(thread);
+                }
+            }
+
+            return Page();
         }
     }
 }

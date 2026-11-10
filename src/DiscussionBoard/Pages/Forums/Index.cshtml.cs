@@ -1,5 +1,6 @@
 using DiscussionBoard.Models;
 using DiscussionBoard.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace DiscussionBoard.Pages;
 public class ForumsModel : PageModel
@@ -23,8 +24,14 @@ public class ForumsModel : PageModel
     /// <summary>
     /// Returns a list of the active forums on the site
     /// </summary>
-    public async Task OnGetAsync()
+    public async Task<IActionResult> OnGetAsync()
     {
+        if (!User.Identity.IsAuthenticated)
+        {
+            return Challenge();
+        }
+
         Items = await _forums.GetAllAsync();
+        return Page();
     }
 }

@@ -24,9 +24,15 @@ namespace DiscussionBoard.Pages.Discussions
             Input = new InputModel();
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Challenge();
+            }
+
             Thread = ThreadService.GetAsync(threadid).Result;
+            return Page();
         }
 
         public void OnPost()

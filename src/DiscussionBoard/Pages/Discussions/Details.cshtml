@@ -1,8 +1,19 @@
-﻿@page "/Discussions/{threadId}"
+﻿@page "/Discussion/{threadId}"
+@using DiscussionBoard.Services
 @model DiscussionBoard.Pages.Discussions.Details
 
 @{ ViewData["Title"] = "Details"; }
-<h1>Details</h1>
+
+@if (Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.DisplayName == null || Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.AvatarId == null || Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.DisplayName.IsWhiteSpace() || Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.AvatarId.IsWhiteSpace())
+{
+    <h2>Unconfigured User</h2>
+    <img src=@AvatarCatalog.ImagePath("default") class="rounded-circle img-fluid" height=100px width=100px>
+}
+else
+{
+    <h2>@Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.DisplayName</h2>
+    <img src=@AvatarCatalog.ImagePath(Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.AvatarId) class="rounded-circle img-fluid" height=100px width=100px>
+}
 @foreach (var post in Model.nodes)
 {
     <partial name="/Pages/Discussions/_PostTree.cshtml" model="post" />

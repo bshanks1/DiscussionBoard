@@ -1,19 +1,48 @@
-﻿@page
+﻿@page "/MyProfile"
+@using DiscussionBoard.Services
+@using Microsoft.CodeAnalysis.CSharp
 @model DiscussionBoard.Pages.MyProfile
-
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title></title>
+    <title>@{ ViewData["Title"] = "My Profile";}</title>
 </head>
 <body>
-<div>
-    
-</div>
-</body>
+
+<div id="UserInfo">
+    <form method="post">
+        <img src=@AvatarCatalog.ImagePath(Model.UserManager.GetUserAsync(User).Result.AvatarId) class="rounded-circle img-fluid" alt="User Profile" style="width: 200px; height: 200px; object-fit: cover;"/>
+
+        <div class="mb-3">
+            <p> Change Display Name:</p>
+            <input type="text" id="NewDisplayName" name="Input.DisplayName" value="@Model.UserManager.GetUserAsync(User).Result.DisplayName">
+        </div >
+        <p>@Model.NameAvailabilityMessage</p>
+
+            <div class ="mb-3" >
+                <p > Change Avatar:</p >
+                @foreach(AvatarCatalog.AvatarOption option in AvatarCatalog.Options)
+                {
+                    <div>
+                        <label for="Input.AvatarId">@option.DisplayName</label>
+                        @if (option.Id.Equals(Model.UserManager.GetUserAsync(User).Result.AvatarId))
+                        {
+                            <input type="radio" id="Input.AvatarId" name="Input.AvatarId" value=@option.Id checked="checked">
+                        }
+                        else
+                        {
+                            <input type="radio" id="Input.AvatarId" name="Input.AvatarId" value=@option.Id>
+                        }
+                        <img src=@AvatarCatalog.ImagePath(option.Id) class="rounded-circle img-fluid" alt="@option.DisplayName" style="width: 100px; height: 100px; object-fit: cover;"/>
+                    </div>
+                }
+            </div >
+            <button class ="btn btn-primary" > Submit </button >
+        </form>
+
+        <p>@Model.AvatarAvailableMessage</p>
+</div >
+    </body>
 </html>

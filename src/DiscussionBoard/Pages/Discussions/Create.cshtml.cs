@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using DiscussionBoard.Models;
 using DiscussionBoard.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -15,12 +16,24 @@ namespace DiscussionBoard.Pages.Discussions
         public DiscussionThread Thread { get; set; }
         private readonly ILogger _logger;
         private readonly IDiscussionThreadService ThreadService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public Create(IDiscussionThreadService _threadService, ILogger<Create> logger)
+        public Create(IDiscussionThreadService _threadService, UserManager<ApplicationUser> userManager, ILogger<Create> logger)
         {
             _logger = logger;
             ThreadService = _threadService;
+            _userManager = userManager;
             Input = new InputModel();
+        }
+
+        public async Task<IActionResult> OnGet()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Challenge();
+            }
+
+            return Page();
         }
 
         public void OnPost()
@@ -34,13 +47,12 @@ namespace DiscussionBoard.Pages.Discussions
 
             else
             {
-                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-                Thread = new DiscussionThread
+                Thread = new DiscussionThread()
                 {
                     Title = Input.Title,
                     Content = Input.Content,
-                    ApplicationUserId = userId,
+                    ApplicationUserId = _userManager.GetUserId(User),
+                    ApplicationUser = _userManager.GetUserAsync(User).GetAwaiter().GetResult(),
                     CreatedAt = DateTimeOffset.UtcNow,
                     ForumId = forumId
                 };

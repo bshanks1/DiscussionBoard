@@ -1,23 +1,25 @@
 using DiscussionBoard.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DiscussionBoard.Services
 {
     /// <summary>Instructor-supplied in-memory tree assembly; students write the EF query, not this algorithm.</summary>
     public static class PostTreeBuilder
     {
-        public sealed class Node(Post post)
+        public sealed class Node(Post post, UserManager<ApplicationUser> userManager)
         {
             public Post Post { get; } = post;
             public List<Node> Replies { get; } = new();
+            public UserManager<ApplicationUser> UserManager { get; } = userManager;
         }
-        public static List<Node> Build(IEnumerable<Post> posts)
+        public static List<Node> Build(IEnumerable<Post> posts,  UserManager<ApplicationUser> userManager)
         {
             var roots = new List<Node>();
             var nodes = new Dictionary<int, Node>();
 
             foreach (Post post in posts)
             {
-                nodes[post.Id] = new Node(post);
+                nodes[post.Id] = new Node(post, userManager);
             }
 
             foreach (Node node in nodes.Values)

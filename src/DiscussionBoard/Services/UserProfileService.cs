@@ -13,14 +13,36 @@ namespace DiscussionBoard.Services
 
         public Task<bool> IsDisplayNameAvailableAsync(string displayName, string? excludeUserId = null)
         {
-            if (displayName.Trim().Length > 1 || displayName.Trim().Length < 60)
+            if (nameValidLength(displayName))
             {
-                bool isAvailable = _context.Users
-                    .Any(u => u.DisplayName.Equals(displayName, StringComparison.CurrentCulture));
-                return Task.FromResult(isAvailable);
+               if (excludeUserId == null)
+               {
+                    bool isAvailable = _context.Users
+                        .Any(u => u.DisplayName.ToLower().Trim().Equals(displayName.ToLower().Trim()));
+                    return Task.FromResult(!isAvailable);
+               }
+               else
+               {
+                    bool isAvailable = _context.Users.Any(u => u.DisplayName.ToLower().Trim().Equals(displayName.ToLower().Trim())
+                                                               && u.Id != excludeUserId);
+                    return Task.FromResult(!isAvailable);
+               }
             }
 
             return Task.FromResult(false);
+        }
+
+        public bool nameValidLength(string displayName)
+        {
+            if (displayName != null && displayName.Trim().Length > 1 && displayName.Trim().Length < 61)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using DiscussionBoard.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DiscussionBoard.Pages.Discussions
 {
@@ -6,7 +8,7 @@ namespace DiscussionBoard.Pages.Discussions
     {
         public void OnGet()
         {
-            
+
         }
     }
 }

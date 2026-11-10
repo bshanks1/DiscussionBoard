@@ -1,7 +1,21 @@
-﻿@model DiscussionBoard.Models.DiscussionThread
+﻿@using DiscussionBoard.Models
+@using DiscussionBoard.Services
+@using Microsoft.IdentityModel.Abstractions
+@model DiscussionBoard.Models.DiscussionThreadUserManager
 <article class="card mb-3">
     <div class="card-body">
-        <h2 class="h5"><a  href="/Discussions/@Model.Id">@Model.Title</a></h2>
-        <p>@Model.Content</p>
+        @if (Model.userManager.FindByIdAsync(Model.thread.ApplicationUserId).Result.DisplayName == null || Model.userManager.FindByIdAsync(Model.thread.ApplicationUserId).Result.AvatarId == null || Model.userManager.FindByIdAsync(Model.thread.ApplicationUserId).Result.DisplayName.IsWhiteSpace() ||Model.userManager.FindByIdAsync(Model.thread.ApplicationUserId).Result.AvatarId.IsWhiteSpace())
+        {
+            <h2 class="h5">Unconfigured User</h2>
+            <img src=@AvatarCatalog.ImagePath("default") class="rounded-circle img-fluid" height=100px width=100px/>
+        }
+
+        else
+        {
+            <h2 class="h5">@Model.userManager.FindByIdAsync(Model.thread.ApplicationUserId).Result.DisplayName</h2>
+            <img src=@AvatarCatalog.ImagePath(Model.userManager.FindByIdAsync(Model.thread.ApplicationUserId).Result.AvatarId)  height=100px width=100px/>
+        }
+        <h2 class="h5"><a href="/Discussion/@Model.thread.Id">@Model.thread.Title</a></h2>
+        <p>@Model.thread.Content</p>
     </div>
 </article>
