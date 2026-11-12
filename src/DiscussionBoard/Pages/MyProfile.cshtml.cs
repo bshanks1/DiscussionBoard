@@ -68,7 +68,7 @@ namespace DiscussionBoard.Pages
                     UserManager.GetUserAsync(User).Result.AvatarId = Input.AvatarId;
                 }
 
-                else if (Input.AvatarId != null && Input.AvatarId.IsWhiteSpace() &&
+                else if (Input.AvatarId != null && Input.AvatarId.IsWhiteSpace() ||
                          AvatarCatalog.IsValid(Input.AvatarId) == false)
                 {
                     AvatarAvailableMessage = "Invalid Section";

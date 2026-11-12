@@ -1,3 +1,4 @@
+using DiscussionBoard.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using DiscussionBoard.Data;
@@ -5,13 +6,12 @@ using DiscussionBoard.Models;
 using DiscussionBoard.Services;
 using Serilog;
 using Serilog.Formatting.Compact;
-using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace DiscussionBoard
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +37,7 @@ namespace DiscussionBoard
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
                     options.SignIn.RequireConfirmedAccount = !builder.Environment.IsDevelopment())
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddRazorPages();
@@ -46,6 +47,7 @@ namespace DiscussionBoard
             builder.Services.AddScoped<IForumService, ForumService>();
             builder.Services.AddScoped<IPostService, PostService>();
             builder.Services.AddScoped<IUserProfileService,  UserProfileService>();
+            builder.Services.AddScoped<IApplicationAuthorizationService, ApplicationAuthorizationService>();
 
 
             var app = builder.Build();

@@ -1,0 +1,67 @@
+﻿@page
+@using DiscussionBoard.Models
+@using Microsoft.EntityFrameworkCore
+@model DiscussionBoard.Pages.Admin.Users
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div id="user-form">
+    <form method="post">
+        <label for="user-id">Users:</label>
+        <select id="user-form" name="selectedUserId">
+            <option value="">--Select User--</option>
+            @foreach (ApplicationUser user in Model.users)
+            {
+                if (user.DisplayName != null && !user.DisplayName.IsWhiteSpace())
+                {
+                    if (Model.selectedUserId != null && Model.selectedUserId.Equals(user.Id))
+                    {
+                        <option value="@user.Id"
+                                selected>@user.DisplayName : @user.Email</option>
+                    }
+
+                    else
+                    {
+                        <option value="@user.Id">@user.DisplayName : @user.Email</option>
+                    }
+                }
+
+                else
+                {
+                    if (Model.selectedUserId != null && Model.selectedUserId.Equals(user.Id))
+                    {
+                        <option value="@user.Id"
+                                selected>Unconfigured User : @user.Email</option>
+                    }
+                    else
+                    {
+                        <option value="@user.Id">Unconfigured User : @user.Email</option>
+                    }
+                }
+            }
+        </select>
+        <button class ="btn btn-primary" > Select User </button >
+    </form>
+
+    @if (Model.isUserSelected)
+    {
+        <form method="UpdateRoleAsync">
+            <label>@Model.SelectedUser.Email</label>
+            @if (Model.canHaveRole)
+            {
+                <button class="btn btn-primary"> Give Admin </button>
+            }
+            else
+            {
+                <button class="btn btn-primary"> Remove Admin </button>
+            }
+        </form>
+    }
+</div>
+</body>
+</html>

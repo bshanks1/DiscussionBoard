@@ -13,6 +13,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003APageModel_002Ecs_002Fl_003A_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2026_002E2_003Fresharper_002Dhost_003FSourcesCache_003Fe4eba1a5d3fbc084947fb1e8de2a3870d699a158372736d71ecdb28fbf581a_003FPageModel_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ARazorPageOfT_002Ecs_002Fl_003A_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2026_002E2_003Fresharper_002Dhost_003FSourcesCache_003F1b7d7cb6609f8d85f36dfd4df6123c8060f4fd5e1699c5f959de6e918d7351_003FRazorPageOfT_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AResourceInvoker_002Ecs_002Fl_003A_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2026_002E2_003Fresharper_002Dhost_003FSourcesCache_003F8d9085adb4ff9548682c7bd179fa5fb12442b9b9a89a1953d31d8fd07f094_003FResourceInvoker_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATagHelperExecutionContext_002Ecs_002Fl_003A_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2026_002E2_003Fresharper_002Dhost_003FSourcesCache_003F4f67eabe46db6bd4eeffd1b68dd4ffeeb563adedb3beeb3589a8806421a1d353_003FTagHelperExecutionContext_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4ad0112b_002Da46a_002D4e1e_002D81fc_002Dbc9b078e9354/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="MyProfileWorkflowTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::04A5D88D-1E21-4EE1-2E08-3F734E480737::net10.0::DiscussionBoard.Tests.Authentication.MyProfileWorkflowTests&lt;/TestId&gt;&#xD;
@@ -28,7 +29,7 @@
     &lt;TestId&gt;xUnit::04A5D88D-1E21-4EE1-2E08-3F734E480737::net10.0::DiscussionBoard.Tests.Authentication.MyProfileWorkflowTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=87ce07b1_002D5350_002D49de_002D9d86_002D90671a7a9446/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AuthorRenderingWorkflowTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=87ce07b1_002D5350_002D49de_002D9d86_002D90671a7a9446/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AuthorRenderingWorkflowTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;ProjectFolder&gt;04A5D88D-1E21-4EE1-2E08-3F734E480737/d:Authentication&lt;/ProjectFolder&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8e19cd0c_002D1095_002D4037_002Dbb2a_002D18a22eb57f54/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;tests&amp;gt;\&amp;lt;DiscussionBoard.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
@@ -38,9 +39,6 @@
     &lt;TestId&gt;xUnit::04A5D88D-1E21-4EE1-2E08-3F734E480737::net10.0::DiscussionBoard.Tests.Authentication.MyProfileWorkflowTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ebbb0776_002Df6f3_002D429c_002D9504_002D122b245fc5f3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="RegistrationWorkflowTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::04A5D88D-1E21-4EE1-2E08-3F734E480737::net10.0::DiscussionBoard.Tests.Authentication.RegistrationWorkflowTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::04A5D88D-1E21-4EE1-2E08-3F734E480737::net10.0::DiscussionBoard.Tests.Authentication.AuthorAttributionTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ebbb0776_002Df6f3_002D429c_002D9504_002D122b245fc5f3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="RegistrationWorkflowTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;ProjectFolder&gt;04A5D88D-1E21-4EE1-2E08-3F734E480737/d:Authentication&lt;/ProjectFolder&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
