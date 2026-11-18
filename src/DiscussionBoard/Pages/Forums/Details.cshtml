@@ -12,7 +12,7 @@
     {
         if (!usedids.Contains(thread.Id))
         {
-            DiscussionThreadUserManager threadUserManager = new DiscussionThreadUserManager(thread, Model.userManager);
+            DiscussionThreadUserManager threadUserManager = new DiscussionThreadUserManager(thread, Model.userManager, Model.ApplicationAuthorizationService);
             <partial name="/Pages/Forums/_ThreadCard.cshtml" model="threadUserManager" />
             usedids.Add(thread.Id);
         }

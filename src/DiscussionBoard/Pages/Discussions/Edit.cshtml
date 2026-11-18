@@ -1,4 +1,4 @@
-﻿@page "/Discussions/Edit/{threadid}"
+﻿@page "/Thread/Edit/{threadid}"
 @model DiscussionBoard.Pages.Discussions.Edit
 
 <html>
@@ -10,11 +10,11 @@
     <form method="post">
         <div class="mb-3">
             <label>Edit Thread Title</label>
-            <input type="text" id="Title" name="Title" value="@Model.Thread.Title">
+            <input type="text" id="Title" name="Input.Title" value="@Model.Thread.Title">
         </div>
         <div class="mb-3">
-            <label>Edit Thread Title</label>
-            <textarea type="text" id="Content" name="Content" rows="5" cols="33">@Model.Thread.Content</textarea>
+            <label>Edit Thread Content</label>
+            <textarea type="text" id="Content" name="Input.Content" rows="5" cols="33">@Model.Thread.Content</textarea>
         </div>
         <button class="btn btn-primary">Submit</button>
     </form>

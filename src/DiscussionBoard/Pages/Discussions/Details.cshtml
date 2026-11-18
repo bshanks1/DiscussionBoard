@@ -4,7 +4,8 @@
 
 @{ ViewData["Title"] = "Details"; }
 
-@if (Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.DisplayName == null || Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.AvatarId == null || Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.DisplayName.IsWhiteSpace() || Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.AvatarId.IsWhiteSpace())
+@if (Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.DisplayName == null ||
+     Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.AvatarId == null || Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.DisplayName.IsWhiteSpace() || Model.UserManager.FindByIdAsync(Model.Thread.ApplicationUserId).Result.AvatarId.IsWhiteSpace())
 {
     <h2>Unconfigured User</h2>
     <img src=@AvatarCatalog.ImagePath("default") class="rounded-circle img-fluid" height=100px width=100px>

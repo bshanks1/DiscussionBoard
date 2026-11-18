@@ -1,4 +1,5 @@
-﻿using DiscussionBoard.Authorization;
+﻿using System.Security.Claims;
+using DiscussionBoard.Authorization;
 using DiscussionBoard.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,16 +12,18 @@ namespace DiscussionBoard.Pages.Admin
     public class Users : PageModel
     {
         public UserManager<ApplicationUser> userManager { get; set; }
+        public IApplicationAuthorizationService appAuth { get; set; }
         public List<ApplicationUser> users { get; set; } = new List<ApplicationUser>();
         public ApplicationUser SelectedUser { get; set; }
         [BindProperty]
-        public string selectedUserId { get; set; }
+        public string SelectedUserId { get; set; }
         public bool canHaveRole { get; set; }
         public bool isUserSelected { get; set; }
 
-        public Users(UserManager<ApplicationUser> userManager)
+        public Users(UserManager<ApplicationUser> userManager,  IApplicationAuthorizationService appAuth)
         {
             this.userManager = userManager;
+            this.appAuth = appAuth;
 
             foreach (var user in userManager.Users)
             {
@@ -36,12 +39,31 @@ namespace DiscussionBoard.Pages.Admin
         public void OnPost()
         {
             isUserSelected = true;
-            SelectedUser = userManager.FindByIdAsync(selectedUserId).Result;
+            SelectedUser = userManager.FindByIdAsync(SelectedUserId).Result;
+
+            if (userManager.GetUsersInRoleAsync(ApplicationRoles.Admin).Result.Contains(SelectedUser))
+            {
+                canHaveRole = false;
+            }
+
+            else
+            {
+                canHaveRole = true;
+            }
         }
 
-        public void OnPostUpdateRoleAsync()
+        public IActionResult OnPostAdd()
         {
-            SelectedUser = userManager.FindByIdAsync(selectedUserId).Result;
+            SelectedUser = userManager.FindByIdAsync(SelectedUserId).Result;
+            appAuth.AddRoleAsync(User, SelectedUserId, ApplicationRoles.Admin);
+            return RedirectToPage("/Admin/Users");
+        }
+
+        public IActionResult OnPostRemove()
+        {
+            SelectedUser = userManager.FindByIdAsync(SelectedUserId).Result;
+            appAuth.RemoveRoleAsync(User, SelectedUserId, ApplicationRoles.Admin);
+            return Redirect("/Admin/Users");
         }
     }
 }

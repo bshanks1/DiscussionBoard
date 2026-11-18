@@ -35,8 +35,25 @@ namespace DiscussionBoard.Services
 
         public async Task<DiscussionThread> UpdateAsync(DiscussionThread thread)
         {
-            _context.Update(thread);
-            await _context.SaveChangesAsync();
+            DiscussionThread ogThread = GetAsync(thread.Id).Result;
+
+            if (ogThread.ForumId == thread.ForumId && ogThread.CreatedAt == thread.CreatedAt &&
+                ogThread.ApplicationUserId.Equals(thread.ApplicationUserId))
+            {
+                _context.Update(thread);
+                await _context.SaveChangesAsync();
+
+            }
+
+            else
+            {
+                ogThread.Title = thread.Title;
+                ogThread.Content = thread.Content;
+                thread =  ogThread;
+                _context.Update(thread);
+                await _context.SaveChangesAsync();
+            }
+
             return thread;
         }
     }

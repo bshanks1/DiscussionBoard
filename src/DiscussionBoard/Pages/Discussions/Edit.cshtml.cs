@@ -1,27 +1,29 @@
 ﻿using System.Security.Claims;
+using DiscussionBoard.Authorization;
 using DiscussionBoard.Models;
 using DiscussionBoard.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DiscussionBoard.Pages.Discussions
 {
+    [Authorize]
     public class Edit : PageModel
     {
         [BindProperty]
-        public InputModel Input { get; set; }
-
+        public DiscussionEditViewModel Input { get; set; }
         [BindProperty(SupportsGet = true)]
         public int threadid { get; set; }
         public DiscussionThread Thread { get; set; }
-        private readonly ILogger _logger;
         private readonly IDiscussionThreadService ThreadService;
+        private readonly IApplicationAuthorizationService ApplicationAuthorizationService;
 
-        public Edit(IDiscussionThreadService _threadService, ILogger<Create> logger)
+        public Edit(IDiscussionThreadService _threadService, IApplicationAuthorizationService applicationAuthorizationService)
         {
-            _logger = logger;
             ThreadService = _threadService;
-            Input = new InputModel();
+            Input = new  DiscussionEditViewModel();
+            ApplicationAuthorizationService = applicationAuthorizationService;
         }
 
         public async Task<IActionResult> OnGet()
@@ -31,35 +33,42 @@ namespace DiscussionBoard.Pages.Discussions
                 return Challenge();
             }
 
+            if (ThreadService.GetAsync(threadid).Result == null)
+            {
+                return NotFound();
+            }
+
             Thread = ThreadService.GetAsync(threadid).Result;
-            return Page();
+
+            if (ApplicationAuthorizationService.CanEditAsync(User, Thread).Result)
+            {
+                return Page();
+            }
+
+            return Forbid();
         }
 
         public void OnPost()
         {
             Thread = ThreadService.GetAsync(threadid).Result;
 
-            if (Input.Title.Length > 500 || Input.Content.Length > 500 || Input.Title.Length <= 0 ||
-                Input.Content.Length <= 0)
+            if (ApplicationAuthorizationService.CanEditAsync(User, Thread).Result)
             {
-                _logger.LogError("Title and Content must be between 1 and 500 characters");
-                RedirectToPage("/Error");
-            }
 
-            else
-            {
-                Thread.Title = Input.Title;
-                Thread.Content = Input.Content;
+                if (Input.Title.Length > 160 || Input.Content.Length > 1000 || Input.Title.Length < 3 ||
+                    Input.Content.Length < 1)
+                {
+                    RedirectToPage("/Error");
+                }
 
-                ThreadService.UpdateAsync(Thread);
+                else
+                {
+                    Thread.Title = Input.Title;
+                    Thread.Content = Input.Content;
+
+                    ThreadService.UpdateAsync(Thread);
+                }
             }
         }
-
-        public class InputModel
-        {
-            public string Title { get; set; }
-            public string Content { get; set; }
-        }
-
     }
 }

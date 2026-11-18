@@ -18,4 +18,11 @@
         <h2 class="h5"><a href="/Discussion/@Model.thread.Id">@Model.thread.Title</a></h2>
         <p>@Model.thread.Content</p>
     </div>
+
+    <div class="card-body">
+        @if (Model.ApplicationAuthorizationService.CanEditAsync(User, Model.thread).Result)
+        {
+            <a href="/Thread/Edit/@Model.thread.Id">Edit Thread</a>
+        }
+    </div>
 </article>

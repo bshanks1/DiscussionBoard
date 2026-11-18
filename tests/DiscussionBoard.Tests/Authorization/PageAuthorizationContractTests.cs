@@ -1,6 +1,7 @@
 using DiscussionBoard.Authorization;
 using DiscussionBoard.Pages;
 using DiscussionBoard.Pages.Admin;
+using DiscussionBoard.Pages.Discussions;
 using Microsoft.AspNetCore.Authorization;
 
 namespace DiscussionBoard.Tests.Authorization;
@@ -8,7 +9,7 @@ namespace DiscussionBoard.Tests.Authorization;
 public sealed class PageAuthorizationContractTests
 {
     [Theory]
-    [InlineData(typeof(UsersModel))]
+    [InlineData(typeof(Users))]
     [InlineData(typeof(Logs))]
     public void AdminPagesRequireAdminRole(Type pageType)
     {
@@ -18,8 +19,8 @@ public sealed class PageAuthorizationContractTests
     }
 
     [Theory]
-    [InlineData(typeof(ThreadEditModel))]
-    [InlineData(typeof(EditPostModel))]
+    [InlineData(typeof(Edit))]
+    [InlineData(typeof(EditPost))]
     public void EditPagesRequireAuthentication(Type pageType)
     {
         Assert.NotEmpty(pageType.GetCustomAttributes(typeof(AuthorizeAttribute), true));

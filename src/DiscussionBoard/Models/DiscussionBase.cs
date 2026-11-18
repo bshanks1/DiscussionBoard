@@ -4,9 +4,9 @@ namespace DiscussionBoard.Models
 {
     public class DiscussionBase : EntityBase
     {
-        [MaxLength(50)]
+        [MinLength(3), MaxLength(160)]
         public string Title { get; set; }
-        [MaxLength(500)]
+        [MinLength(1), MaxLength(1000)]
         public string Content { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public string ApplicationUserId { get; set; }

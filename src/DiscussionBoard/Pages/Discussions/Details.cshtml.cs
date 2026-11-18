@@ -1,4 +1,5 @@
-﻿using DiscussionBoard.Models;
+﻿using DiscussionBoard.Authorization;
+using DiscussionBoard.Models;
 using DiscussionBoard.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +18,15 @@ namespace DiscussionBoard.Pages.Discussions
         public UserManager<ApplicationUser> UserManager { get; }
 
         public List<PostTreeBuilder.Node> nodes;
+        public IApplicationAuthorizationService AuthorizationService;
 
-        public Details(ILogger<Details> logger, IDiscussionThreadService threadService, IPostService postService,  UserManager<ApplicationUser> userManager)
+        public Details(ILogger<Details> logger, IDiscussionThreadService threadService, IPostService postService,  UserManager<ApplicationUser> userManager,  IApplicationAuthorizationService authorizationService)
         {
             _logger = logger;
             _threadService = threadService;
             _postService = postService;
             UserManager = userManager;
+            AuthorizationService  = authorizationService;
         }
 
         public async Task<IActionResult> OnGet()
@@ -34,7 +37,7 @@ namespace DiscussionBoard.Pages.Discussions
             }
 
             Thread = _threadService.GetAsync(threadId).Result;
-            nodes = PostTreeBuilder.Build(_postService.GetForThreadAsync(threadId).Result, UserManager);
+            nodes = PostTreeBuilder.Build(_postService.GetForThreadAsync(threadId).Result, UserManager, AuthorizationService);
             return Page();
         }
     }

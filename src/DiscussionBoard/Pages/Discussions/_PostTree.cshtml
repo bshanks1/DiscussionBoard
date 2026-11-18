@@ -26,6 +26,10 @@
             </form>
         </details>
     }
+    @if (Model.AuthorizationService.CanEditAsync(User, Model.Post).Result)
+    {
+        <a href="/Discussion/@Model.Post.DiscussionThreadId/Post/Edit/@Model.Post.Id"></a>
+    }
     @* This recursively displays the replies to build the visual hierarchy *@
     @if (Model.Replies.Count > 0)
     {

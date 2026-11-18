@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DiscussionBoard.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace DiscussionBoard.Models
 {
@@ -6,11 +7,13 @@ namespace DiscussionBoard.Models
     {
         public DiscussionThread thread;
         public UserManager<ApplicationUser> userManager;
+        public IApplicationAuthorizationService ApplicationAuthorizationService {get; set;}
 
-        public DiscussionThreadUserManager(DiscussionThread thread, UserManager<ApplicationUser> userManager)
+        public DiscussionThreadUserManager(DiscussionThread thread, UserManager<ApplicationUser> userManager, IApplicationAuthorizationService applicationAuthorizationService)
         {
             this.thread = thread;
             this.userManager = userManager;
+            ApplicationAuthorizationService = applicationAuthorizationService;
         }
 
     }

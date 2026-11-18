@@ -1,4 +1,5 @@
-﻿using DiscussionBoard.Models;
+﻿using DiscussionBoard.Authorization;
+using DiscussionBoard.Models;
 using DiscussionBoard.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,13 +17,15 @@ namespace DiscussionBoard.Pages.Forums
         private readonly IDiscussionThreadService _threads;
         private readonly ILogger<Details> _logger;
         public UserManager<ApplicationUser> userManager;
+        public IApplicationAuthorizationService ApplicationAuthorizationService { get; }
 
-        public Details(IForumService forums, IDiscussionThreadService threads, ILogger<Details> logger, UserManager<ApplicationUser> userManager)
+        public Details(IForumService forums, IDiscussionThreadService threads, ILogger<Details> logger, UserManager<ApplicationUser> userManager,  IApplicationAuthorizationService applicationAuthorizationService)
         {
             _forums = forums;
             _threads = threads;
             _logger = logger;
             this.userManager = userManager;
+            ApplicationAuthorizationService = applicationAuthorizationService;
         }
 
         public async Task<IActionResult> OnGet()

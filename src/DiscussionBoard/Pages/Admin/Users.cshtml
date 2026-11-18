@@ -19,7 +19,7 @@
             {
                 if (user.DisplayName != null && !user.DisplayName.IsWhiteSpace())
                 {
-                    if (Model.selectedUserId != null && Model.selectedUserId.Equals(user.Id))
+                    if (Model.SelectedUserId != null && Model.SelectedUserId.Equals(user.Id))
                     {
                         <option value="@user.Id"
                                 selected>@user.DisplayName : @user.Email</option>
@@ -33,7 +33,7 @@
 
                 else
                 {
-                    if (Model.selectedUserId != null && Model.selectedUserId.Equals(user.Id))
+                    if (Model.SelectedUserId != null && Model.SelectedUserId.Equals(user.Id))
                     {
                         <option value="@user.Id"
                                 selected>Unconfigured User : @user.Email</option>
@@ -48,18 +48,19 @@
         <button class ="btn btn-primary" > Select User </button >
     </form>
 
-    @if (Model.isUserSelected)
+    @if (Model.isUserSelected && Model.canHaveRole)
     {
-        <form method="UpdateRoleAsync">
+        <form method="post" asp-page-handler="Add">
             <label>@Model.SelectedUser.Email</label>
-            @if (Model.canHaveRole)
-            {
-                <button class="btn btn-primary"> Give Admin </button>
-            }
-            else
-            {
-                <button class="btn btn-primary"> Remove Admin </button>
-            }
+            <button class="btn btn-primary"> Give Admin </button>
+        </form>
+    }
+
+    @if (Model.isUserSelected && !Model.canHaveRole)
+    {
+        <form method="post" asp-page-handler="Remove">
+            <label>@Model.SelectedUser.Email</label>
+            <button class="btn btn-primary"> Remove Admin </button>
         </form>
     }
 </div>
