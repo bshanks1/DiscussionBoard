@@ -20,13 +20,15 @@ namespace DiscussionBoard
             // Get the location of the Logs folder for SeriLog
             string logPath = Path.Combine(builder.Environment.ContentRootPath, "Logs",  "discussionboard-.json");
 
+            builder.Configuration.AddJsonFile(logPath);
+
             builder.Services.AddSerilog((services, configuration) => configuration
                 .WriteTo.Console()
-                .WriteTo.File(
+                .WriteTo.Async(f => f.File(
                     new RenderedCompactJsonFormatter(),
                     logPath,
                     rollingInterval: RollingInterval.Day,
-                    shared: true)
+                    shared: true))
             );
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
