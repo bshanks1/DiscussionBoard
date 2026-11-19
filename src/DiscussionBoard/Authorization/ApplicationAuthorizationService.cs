@@ -28,7 +28,7 @@ namespace DiscussionBoard.Authorization
         public async Task<IdentityResult> AddRoleAsync(ClaimsPrincipal actingUser, string targetUserId, string roleName)
         {
 
-            if(actingUser.HasClaim(c => c.Type == ClaimTypes.Authentication && c.Value == "true") && UserManager.GetUsersInRoleAsync(ApplicationRoles.Admin).Result.Contains(UserManager.GetUserAsync(actingUser).Result)
+            if(UserManager.GetUsersInRoleAsync(ApplicationRoles.Admin).Result.Contains(UserManager.GetUserAsync(actingUser).Result)
                && actingUser.HasClaim(c => c.Type == ClaimTypes.Role && c.Value.Equals(ApplicationRoles.Admin)) && roleName.Equals(ApplicationRoles.Admin)
                && UserManager.FindByIdAsync(targetUserId).Result != null)
             {
@@ -43,9 +43,10 @@ namespace DiscussionBoard.Authorization
         {
             if(actingUser.HasClaim(c => c.Type == ClaimTypes.Role && c.Value == ApplicationRoles.Admin))
             {
-                if (!UserManager.GetUserAsync(actingUser).Result.Id.Equals(targetUserId) || UserManager.GetUsersInRoleAsync(ApplicationRoles.Admin).Result.Count > 1)
+                if (!actingUser.HasClaim(c => c.Type == ClaimTypes.NameIdentifier && c.Value.Equals(targetUserId)) && UserManager.GetUsersInRoleAsync(ApplicationRoles.Admin).Result.Count > 1)
                 {
                     await UserManager.RemoveFromRoleAsync(UserManager.FindByIdAsync(targetUserId).Result, roleName);
+                    return  IdentityResult.Success;
                 }
             }
 

@@ -12,7 +12,7 @@ namespace DiscussionBoard.Pages.Discussions
         [BindProperty]
         public InputModel Input { get; set; }
         [BindProperty (SupportsGet = true)]
-        public int forumId { get; set; }
+        public int forumid { get; set; }
         public DiscussionThread Thread { get; set; }
         private readonly ILogger _logger;
         private readonly IDiscussionThreadService ThreadService;
@@ -54,7 +54,7 @@ namespace DiscussionBoard.Pages.Discussions
                     ApplicationUserId = _userManager.GetUserId(User),
                     ApplicationUser = _userManager.GetUserAsync(User).GetAwaiter().GetResult(),
                     CreatedAt = DateTimeOffset.UtcNow,
-                    ForumId = forumId
+                    ForumId = forumid
                 };
 
                 ThreadService.AddAsync(Thread);

@@ -52,8 +52,11 @@ public class EditPost : PageModel
         return Forbid();
     }
 
-    public void OnPost()
+    public async Task<IActionResult> OnPost()
     {
+        Thread = ThreadService.GetAsync(threadid).Result;
+        Post = PostService.GetAsync(postid).Result;
+
         if (Thread.Id == threadid && Post.Id == postid && ApplicationAuthorizationService.CanEditAsync(User, Post).Result)
         {
             if (Input.Title.Length > 160 || Input.Content.Length > 1000 || Input.Title.Length < 3 ||
@@ -64,11 +67,13 @@ public class EditPost : PageModel
 
             else
             {
-                Thread.Title = Input.Title;
-                Thread.Content = Input.Content;
+                Post.Title = Input.Title;
+                Post.Content = Input.Content;
 
-                ThreadService.UpdateAsync(Thread);
+                PostService.UpdateAsync(Post);
             }
         }
+
+        return Forbid();
     }
 }

@@ -13,7 +13,7 @@
 <div id="user-form">
     <form method="post">
         <label for="user-id">Users:</label>
-        <select id="user-form" name="selectedUserId">
+        <select id="user-form" name="SelectedUserId">
             <option value="">--Select User--</option>
             @foreach (ApplicationUser user in Model.users)
             {
@@ -52,6 +52,7 @@
     {
         <form method="post" asp-page-handler="Add">
             <label>@Model.SelectedUser.Email</label>
+            <input type="hidden" id="selectedUserId" name="SelectedUserId" value=@Model.SelectedUser.Id>
             <button class="btn btn-primary"> Give Admin </button>
         </form>
     }
@@ -60,6 +61,7 @@
     {
         <form method="post" asp-page-handler="Remove">
             <label>@Model.SelectedUser.Email</label>
+            <input type="hidden" id="selectedUserId" name="SelectedUserId" value=@Model.SelectedUser.Id>
             <button class="btn btn-primary"> Remove Admin </button>
         </form>
     }

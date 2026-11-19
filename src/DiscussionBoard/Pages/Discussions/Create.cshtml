@@ -1,4 +1,4 @@
-﻿@page "/Discussions/Create/{forumid}"
+﻿@page "/Thread/Create/{forumid}"
 @model DiscussionBoard.Pages.Discussions.Create
 
 
@@ -12,11 +12,11 @@
 <div id="form">
     <form method="post">
         <div class="mb-3">
-            <label>Edit Thread Title</label>
+            <label>Create Thread Title</label>
             <input type="text" id="Title" name="Title" value="Enter Title Here.">
         </div>
         <div class="mb-3">
-            <label>Edit Thread Title</label>
+            <label>Create Thread Content</label>
             <textarea type="text" id="Content" name="Content" rows="5" cols="33">Enter Text Here.</textarea>
         </div>
         <button class="btn btn-primary">Submit</button>

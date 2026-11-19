@@ -48,7 +48,7 @@ namespace DiscussionBoard.Pages.Discussions
             return Forbid();
         }
 
-        public void OnPost()
+        public async Task<IActionResult> OnPost()
         {
             Thread = ThreadService.GetAsync(threadid).Result;
 
@@ -69,6 +69,8 @@ namespace DiscussionBoard.Pages.Discussions
                     ThreadService.UpdateAsync(Thread);
                 }
             }
+
+            return Forbid();
         }
     }
 }
